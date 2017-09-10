@@ -1,12 +1,14 @@
-# lombiajs
+# Lombiajs
 framework js
 
 Example:
 
-<div id="app">
+# First tools #
+
+'<div id="app">
   <h1>{{title}}</h1>
   <h2>{{description}}</h2>
-</div>
+</div>'
 
 <script>
   new Lombia({
