@@ -70,7 +70,9 @@ var Lombia = (function() {
             res.forEach(function(e) {
                 var word = e.replace(/[{}]/g, '');
                 var wordFilter = word.split("|");
+                if (typeof data[wordFilter[0]] === "function") return console.error("Cannot renderize a Function " + e);
                 if (data[wordFilter[0]]) {
+                    console.log(typeof wordFilter[0] === 'function');
                     var convertWord = wordFilter.length === 2 ? this.setFilter(data[wordFilter[0]], wordFilter[1]) : data[wordFilter[0]];
                     outhtml = outhtml.replace(e, convertWord);
                 }

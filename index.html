@@ -17,6 +17,7 @@
                         </div>
                         {{usuario}}
                     </div>
+                    {{elem}}
                 </h1>
             </div>
         </div>
@@ -25,7 +26,10 @@
                 name: 'probando',
                 data: {
                     usuario: 'USUARIO AQUI',
-                    password: 'PASSWORD HERE'
+                    password: 'PASSWORD HERE',
+                    elem:  function() {
+                        console.log("");
+                    }
                 }
             });
 
