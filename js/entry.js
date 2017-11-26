@@ -61,6 +61,11 @@ var Lombia = (function() {
         return false;
     }
 
+    Lombia.prototype.setErrorForObject = function(e) {
+        console.error('try other method for renderize a object' + e);
+        return '[is an object]';
+    }
+
     Lombia.prototype.interpolation = function(result) {
         var data = superData;
         var outhtml = result.textContent;
@@ -72,9 +77,8 @@ var Lombia = (function() {
                 var wordFilter = word.split("|");
                 if (typeof data[wordFilter[0]] === "function") return console.error("Cannot renderize a Function " + e);
                 if (data[wordFilter[0]]) {
-                    console.log(typeof wordFilter[0] === 'function');
                     var convertWord = wordFilter.length === 2 ? this.setFilter(data[wordFilter[0]], wordFilter[1]) : data[wordFilter[0]];
-                    outhtml = outhtml.replace(e, convertWord);
+                    outhtml = outhtml.replace(e, (typeof data[wordFilter[0]] !== 'object' ? data[wordFilter[0]] : this.setErrorForObject(e)));
                 }
                 else {
                     this.setError('# element no exist');
