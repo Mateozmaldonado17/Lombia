@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Holaaa</title>
+    </head>
+        
+    <body> 
+        <script src="./js/entry.js" type="text/javascript"></script> 
+        <div id="probando">
+            djfs fjsdf ds {{password|uppercase}}
+            <div id="Hola">
+                Hola otra cosa <h1>{{usuario|capitalize}}</h1>
+                <div id="HOLAA">
+                    <h3>Shii</h3>
+                </div>
+            </div>
+        </div>
+        <script>
+            function iterpolation (elem) {
+                if (elem) {
+                    if (elem.nodeName === "#text") {
+                        elem.textContent = "Holaaaaa";
+                    }
+                    else {
+                        getChilders(elem);
+                    }
+                }
+            }
+            function getChilders(elements) {
+                if (!elements) return console.error("This element does exist");
+                elements.childNodes.forEach (e => {
+                    iterpolation(e);
+                })
+            }
+            getChilders(document.querySelector('#probando'));
+        </script>
+    </body>
+</html>

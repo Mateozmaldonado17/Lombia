@@ -9,15 +9,23 @@
         <div id="probando">
             djfs fjsdf ds {{password|uppercase}}
             <div id="Hola">
-                Hola otra cosa {{usuario|capitalize}}
+                Hola otra cosa <h1 id="a">{{usuario|capitalize}} 
+                    <span>Hola {{usuario}}</span>
+                    <div>
+                        <div>
+                            <span>{{password}}</span>
+                        </div>
+                        {{usuario}}
+                    </div>
+                </h1>
             </div>
         </div>
         <script>
             new Lombia({
                 name: 'probando',
                 data: {
-                    usuario: 'peo',
-                    password: 'sisi'
+                    usuario: 'USUARIO AQUI',
+                    password: 'PASSWORD HERE'
                 }
             });
 
