@@ -1,4 +1,5 @@
 var Lombia = (function() {
+    
     var _d = document;
     var superData = null;
     function Lombia(app) {
@@ -62,7 +63,7 @@ var Lombia = (function() {
     }
 
     Lombia.prototype.setErrorForObject = function(e) {
-        console.error('try other method for renderize a object' + e);
+        console.error('try other method for renderize an object ' + e);
         return '[is an object]';
     }
 
@@ -78,7 +79,7 @@ var Lombia = (function() {
                 if (typeof data[wordFilter[0]] === "function") return console.error("Cannot renderize a Function " + e);
                 if (data[wordFilter[0]]) {
                     var convertWord = wordFilter.length === 2 ? this.setFilter(data[wordFilter[0]], wordFilter[1]) : data[wordFilter[0]];
-                    outhtml = outhtml.replace(e, (typeof data[wordFilter[0]] !== 'object' ? data[wordFilter[0]] : this.setErrorForObject(e)));
+                    outhtml = outhtml.replace(e, (typeof data[wordFilter[0]] !== 'object' ? convertWord : this.setErrorForObject(e)));
                 }
                 else {
                     this.setError('# element no exist');
