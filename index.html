@@ -6,9 +6,9 @@
         
     <body> 
         <script src="./js/entry.js" type="text/javascript"></script> 
-        <div id="probando">
+        <div id="probando" >
             djfs fjsdf ds {{password|uppercase}}
-            <div id="Hola">
+            <div id="Hola" lombia-if="this.nombre === 'karlota'">
                 Hola otra cosa <h1 id="a">{{usuario|capitalize}} 
                     <span>Hola {{usuario}}</span>
                     <div>
@@ -17,12 +17,17 @@
                         </div>
                         {{usuario}}
                     </div>
-                    {{elem}}
                     y tambien {{ob}}
 
-                    <h1>Hola {{nombre|uppercase}}</h1>
+                    <h1>Hola {{nombre|capitalize}}</h1>
                 </h1>
             </div>
+
+
+            <div lombia-for="(persona in this.personas)">
+                <h1>Bienvenido a la mejor cuenta {{nombre}}</h1>
+            </div>
+            
         </div>
         <script>
             new Lombia({
@@ -31,9 +36,16 @@
                     usuario: 'USUARIO AQUI',
                     nombre: 'karlota',
                     password: 'PASSWORD HERE',
-                    elem:  function() {
-                        console.log("");
-                    },
+                    personas:  [
+                        {
+                            nombre: 'fulano',
+                            apellido: 'sutano'
+                        },
+                        {
+                            nombre: 'si',
+                            apellido: 'tu me partiste el corazon'
+                        }
+                    ],
                     ob: (1 + 2)
                 }
             });

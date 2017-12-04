@@ -11,13 +11,52 @@ var Lombia = (function() {
         else {
             this.getElements(result);
         }
+        return superData;
     };
+    
+    Lombia.prototype.removeAllNodes = function(myNode) {
+        while (myNode.firstChild) {
+            myNode.removeChild(myNode.firstChild);
+        }
+    }
+
+    Lombia.prototype.eval = function(exp, elem) {
+        if (elem) {
+            var innerHTMLElement = elem.innerHTML;
+            while (elem.firstChild) {
+                elem.removeChild(elem.firstChild);
+            }
+        }
+        return eval(exp);
+    };
+
+
+    Lombia.prototype.filters = function(elem) {
+        if (elem.attributes) {
+            if ('lombia-if' in elem.attributes) {
+                let expression = this.eval.call(superData, elem.getAttribute('lombia-if'));
+                if (typeof expression === 'boolean' && expression === false) {
+                    console.log(expression);
+                    let parent = elem.parentNode;
+                    parent.removeChild(elem);
+                }
+            }
+            else if ('lombia-for' in elem.attributes) {
+                
+                let exWithFor = `
+                    for (${elem.getAttribute('lombia-for')}) {
+                        elem.innerHTML += innerHTMLElement;
+                    }
+                `;
+                this.eval.apply(superData, [exWithFor, elem]);
+            }
+        }
+    }
 
     Lombia.prototype.preIterpolation = function(elem) {
         if (elem) {
             if (elem.nodeName === "#text") {
-                
-                this.interpolation(elem, superData.data);
+                this.interpolation(elem, superData);
             }
             else {
                 this.getElements(elem);
@@ -26,8 +65,9 @@ var Lombia = (function() {
     }
 
     Lombia.prototype.getElements = function(elements) {
-        if (!elements) return console.error("This element does exist");
+        if (!elements) return console.error("This element doesn't- exist");
         elements.childNodes.forEach (e => {
+            this.filters(e);
             this.preIterpolation(e);
         });
     }
@@ -67,8 +107,8 @@ var Lombia = (function() {
         return '[is an object]';
     }
 
-    Lombia.prototype.interpolation = function(result) {
-        var data = superData;
+    Lombia.prototype.interpolation = function(result, sData) {
+        var data = sData;
         var outhtml = result.textContent;
         var reg = new RegExp(/{{\s*(.*)+\s*}}/g);
         var res = outhtml.match(reg);
